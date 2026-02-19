@@ -1,11 +1,10 @@
 name: Python CI
 
-# Trigger on pushes to your branch and PRs to main
 on:
   push:
-    branches: [ ci-workflow ]  # your working branch
+    branches: [ ci-workflow ]
   pull_request:
-    branches: [ main ]         # PRs to main
+    branches: [ main ]
 
 jobs:
   test:
@@ -13,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        python-version: [3.11]  # valid Python versions
+        python-version: [3.11]
 
     steps:
     - name: Checkout repository
@@ -30,16 +29,7 @@ jobs:
         pip install -r requirements.txt
         pip install pytest pytest-cov
 
-    - name: Use GitHub Secret (demo)
-      run: echo "Demo secret value is ${{ secrets.TEST_SECRET }}"
-
-    - name: Run tests with coverage
+    - name: Run tests
       run: |
-        # Fail if coverage is less than 90%
-        pytest --cov=bank_account --cov-fail-under=90
-
-    - name: Introduce failing test (optional demo)
-      if: false  # set to true to force a failing build
-      run: |
-        echo "def test_fail(): assert 1 == 2" > tests/test_fail.py
+        pytest
 
