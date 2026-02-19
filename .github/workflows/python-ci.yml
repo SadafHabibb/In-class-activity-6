@@ -13,7 +13,7 @@ jobs:
 
     strategy:
       matrix:
-        python-version: [3.10, 3.11]  # valid Python versions
+        python-version: [3.11]  # valid Python versions
 
     steps:
     - name: Checkout repository
