@@ -1,0 +1,25 @@
+name: Python CI
+
+on:
+  push:
+    branches: [ ci-workflow ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python-version: [3.11]
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - run: |
+        pip install pytest
+        export PYTHONPATH=$PWD
+        pytest
+
